@@ -1,6 +1,8 @@
 package com.github.abhrp.stocksdemo.application
 
 import android.app.Application
+import android.content.Context
+import android.support.multidex.MultiDex
 import com.github.abhrp.stocksdemo.BuildConfig
 import com.github.abhrp.stocksdemo.db.DatabaseModule
 import timber.log.Timber
@@ -33,5 +35,10 @@ class StocksApplication: Application() {
 
     fun getApplicationComponent(): ApplicationComponent {
         return applicationComponent;
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 }

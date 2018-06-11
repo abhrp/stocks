@@ -9,11 +9,7 @@ import dagger.Provides
 @Module
 class DatabaseModule(context: Context) {
 
-    private var stockDatabase: StockDatabase
-
-    init {
-        stockDatabase = Room.databaseBuilder(context, StockDatabase::class.java, "stock-db").build()
-    }
+    private val stockDatabase: StockDatabase = Room.databaseBuilder(context, StockDatabase::class.java, "stock-db").build()
 
     @ApplicationScope
     @Provides
@@ -22,4 +18,8 @@ class DatabaseModule(context: Context) {
     @ApplicationScope
     @Provides
     fun getStockDao(): StockDao = stockDatabase.getStockDao()
+
+    @ApplicationScope
+    @Provides
+    fun getCompanyDao(): CompanyDao = stockDatabase.getCompanyDao()
 }

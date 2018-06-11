@@ -3,14 +3,14 @@ package com.github.abhrp.stocksdemo.model
 import com.google.gson.annotations.SerializedName
 
 data class ChartItem(
-        @SerializedName("date") var date: String?,
-        @SerializedName("open") var open: Double?,
-        @SerializedName("high") var high: Double?,
-        @SerializedName("low") var low: Double?,
-        @SerializedName("close") var close: Double?,
-        @SerializedName("volume") var volume: Long?,
-        @SerializedName("change") var change: Double?,
-        @SerializedName("changePercent") var changePercent: Double?,
-        @SerializedName("label") var label: String?,
-        @SerializedName("changeOverTime") var changeOverTime: Double?
+        @SerializedName("date") val date: String?,
+        @SerializedName("open") val open: Double?,
+        @SerializedName("high") val high: Double?,
+        @SerializedName("low") val low: Double?,
+        @SerializedName("close") val close: Double?,
+        @SerializedName("volume") val volume: Long?,
+        @SerializedName("change") val change: Double?,
+        @SerializedName("changePercent") val changePercent: Double?,
+        @SerializedName("label") val label: String?,
+        @SerializedName("changeOverTime") val changeOverTime: Double?
 )

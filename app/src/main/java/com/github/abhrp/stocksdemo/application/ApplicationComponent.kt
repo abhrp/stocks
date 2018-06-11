@@ -9,7 +9,7 @@ import dagger.Component
 import retrofit2.Retrofit
 
 @ApplicationScope
-@Component(modules = arrayOf(ApplicationContextModule::class, RetrofitModule::class, PicassoModule::class, DatabaseModule::class))
+@Component(modules = [(ApplicationContextModule::class), (RetrofitModule::class), (PicassoModule::class), (DatabaseModule::class)])
 interface ApplicationComponent {
     fun retrofit(): Retrofit
 
