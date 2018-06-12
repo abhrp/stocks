@@ -26,8 +26,8 @@ class StocksAdapter : RecyclerView.Adapter<StockViewHolder>() {
     override fun onBindViewHolder(holder: StockViewHolder, position: Int) {
         if (::stocks.isInitialized && position >= 0 && position < stocks.size) {
             val stock = stocks[position]
-            val open = stock.open!!
-            val close = stock.close!!
+            val open = stock.open
+            val close = stock.close
             holder.bind(stock, open <= close, stockItemClickListener)
         }
     }

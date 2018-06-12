@@ -95,10 +95,6 @@ class CompanyDetailsActivity : AppCompatActivity() {
                 Logger.e(TAG, error)
             }
         })
-
-        companyViewModel.getCompanyLoader().observe(this, Observer<Boolean> {
-
-        })
     }
 
     private fun loadCompany() {
@@ -170,5 +166,4 @@ class CompanyDetailsActivity : AppCompatActivity() {
         super.onDestroy()
         companyViewModel.clearDisposables()
     }
-
 }

@@ -13,7 +13,6 @@ import javax.inject.Inject
 class CompanyDetailsViewModel @Inject constructor(private val repository: CompanyDetailsRepository) : ViewModel() {
     private var companyResult: MutableLiveData<Company> = MutableLiveData()
     private var companyError: MutableLiveData<Throwable> = MutableLiveData()
-    private var companyLoader: MutableLiveData<Boolean> = MutableLiveData()
     private lateinit var disposableObserver: DisposableObserver<Company>
 
     fun getCompany(): LiveData<Company> {
@@ -22,10 +21,6 @@ class CompanyDetailsViewModel @Inject constructor(private val repository: Compan
 
     fun getCompanyError(): LiveData<Throwable> {
         return companyError
-    }
-
-    fun getCompanyLoader(): LiveData<Boolean> {
-        return companyLoader
     }
 
     fun loadStocks(stockSymbol: String) {
@@ -40,12 +35,10 @@ class CompanyDetailsViewModel @Inject constructor(private val repository: Compan
 
             override fun onNext(company: Company) {
                 companyResult.postValue(company)
-                companyLoader.postValue(false)
             }
 
             override fun onError(e: Throwable) {
                 companyError.postValue(e)
-                companyLoader.postValue(false)
             }
         }
         repository.getCompany(stockSymbol)

@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class CompanyViewModelFactory @Inject constructor(private val companyViewModel: CompanyDetailsViewModel) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(CompanyDetailsViewModel::class.java!!)) {
+        if (modelClass.isAssignableFrom(CompanyDetailsViewModel::class.java)) {
             return companyViewModel as T
         }
         throw IllegalArgumentException(AppConstants.UNKNOWN_ERROR)
