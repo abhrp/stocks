@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.github.abhrp.stocksdemo.R
 import com.github.abhrp.stocksdemo.application.AppConstants
-import com.github.abhrp.stocksdemo.data.model.ChartItem
 import com.github.abhrp.stocksdemo.data.model.Company
 import com.github.abhrp.stocksdemo.data.model.Stock
 import com.github.abhrp.stocksdemo.util.Logger
@@ -19,6 +18,7 @@ import com.github.abhrp.stocksdemo.util.Utils
 import com.github.abhrp.stocksdemo.viemodels.CompanyDetailsViewModel
 import com.github.abhrp.stocksdemo.viemodels.factories.CompanyViewModelFactory
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.CandleData
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_company_details.*
 import kotlinx.android.synthetic.main.content_company_details.*
@@ -86,7 +86,11 @@ class CompanyDetailsActivity : AppCompatActivity() {
     private fun handleCompanyData() {
         companyViewModel.getCompany().observe(this, Observer<Company> { company ->
             company?.let {
-                updateUI(it)
+                var candleData = CandleData()
+                company.chart?.let {
+                    candleData = ohclDataParser.createChartData(it)
+                }
+                updateUI(it, candleData)
             }
         })
         companyViewModel.getCompanyError().observe(this, Observer<Throwable> { error ->
@@ -101,10 +105,10 @@ class CompanyDetailsActivity : AppCompatActivity() {
         companyViewModel.loadStocks(stock.symbol)
     }
 
-    private fun updateUI(company: Company) {
+    private fun updateUI(company: Company, candleData: CandleData) {
         runOnUiThread {
             setUpCompanyDetails(company)
-            company.chart?.let { loadChart(it) }
+            loadChart(candleData)
             if (!utils.isConnectedToInternet()) {
                 Snackbar.make(company_details, getString(R.string.offline_message), Snackbar.LENGTH_LONG).show()
             }
@@ -137,8 +141,8 @@ class CompanyDetailsActivity : AppCompatActivity() {
         chart_view.resetTracking()
     }
 
-    private fun loadChart(chart: List<ChartItem>) {
-        chart_view.data = ohclDataParser.createChartData(chart)
+    private fun loadChart(candleData: CandleData) {
+        chart_view.data = candleData
         chart_view.invalidate()
     }
 

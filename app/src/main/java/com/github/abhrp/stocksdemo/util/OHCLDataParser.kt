@@ -10,12 +10,12 @@ import com.github.mikephil.charting.data.CandleEntry
 import javax.inject.Inject
 
 class OHCLDataParser @Inject constructor() {
+
     fun createChartData(chart: List<ChartItem>): CandleData {
         val candleEntries = getCandleEntries(chart)
         val candleDataSet = getCandleDataSet(candleEntries)
         return CandleData(candleDataSet)
     }
-
 
     private fun getCandleDataSet(candleEntries: List<CandleEntry>): CandleDataSet {
         val set = CandleDataSet(candleEntries, "Data set")
