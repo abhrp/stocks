@@ -5,24 +5,26 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import android.view.View
 import com.github.abhrp.stocksdemo.R
 import com.github.abhrp.stocksdemo.application.AppConstants
+import com.github.abhrp.stocksdemo.data.model.ChartItem
 import com.github.abhrp.stocksdemo.data.model.Company
 import com.github.abhrp.stocksdemo.data.model.Stock
 import com.github.abhrp.stocksdemo.util.Logger
+import com.github.abhrp.stocksdemo.util.OHCLDataParser
 import com.github.abhrp.stocksdemo.util.Utils
 import com.github.abhrp.stocksdemo.viemodels.CompanyDetailsViewModel
 import com.github.abhrp.stocksdemo.viemodels.factories.CompanyViewModelFactory
+import com.github.mikephil.charting.components.XAxis
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_company_details.*
 import kotlinx.android.synthetic.main.content_company_details.*
-import kotlinx.android.synthetic.main.notification_template_lines_media.view.*
 import javax.inject.Inject
 
-class CompanyDetailsActivity : AppCompatActivity(), View.OnClickListener {
+class CompanyDetailsActivity : AppCompatActivity() {
 
     private val TAG = CompanyDetailsActivity::class.java.canonicalName
 
@@ -32,6 +34,8 @@ class CompanyDetailsActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var companyViewModelFactory: CompanyViewModelFactory
     @Inject
     lateinit var utils: Utils
+    @Inject
+    lateinit var ohclDataParser: OHCLDataParser
 
     private lateinit var companyViewModel: CompanyDetailsViewModel
 
@@ -43,6 +47,7 @@ class CompanyDetailsActivity : AppCompatActivity(), View.OnClickListener {
         setUpViewModel()
         setUpActionBar()
         setUpStockDetails()
+        setUpChart()
         handleCompanyData()
         loadCompany()
     }
@@ -86,6 +91,7 @@ class CompanyDetailsActivity : AppCompatActivity(), View.OnClickListener {
         })
         companyViewModel.getCompanyError().observe(this, Observer<Throwable> { error ->
             error?.let {
+                Snackbar.make(company_details, getString(R.string.error), Snackbar.LENGTH_LONG).show()
                 Logger.e(TAG, error)
             }
         })
@@ -102,6 +108,10 @@ class CompanyDetailsActivity : AppCompatActivity(), View.OnClickListener {
     private fun updateUI(company: Company) {
         runOnUiThread {
             setUpCompanyDetails(company)
+            company.chart?.let { loadChart(it) }
+            if (!utils.isConnectedToInternet()) {
+                Snackbar.make(company_details, getString(R.string.offline_message), Snackbar.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -111,13 +121,35 @@ class CompanyDetailsActivity : AppCompatActivity(), View.OnClickListener {
         sector.text = company.sector
         ceo.text = company.ceo
         website.text = company.website
-        website.setOnClickListener(this)
+        website.setOnClickListener{goToWebsite(company.website)}
     }
 
-    override fun onClick(v: View?) {
-        if (v?.id == R.id.website) {
+    private fun setUpChart() {
+        chart_view.description.isEnabled = false
+        chart_view.setMaxVisibleValueCount(40)
+        chart_view.setPinchZoom(false)
+        chart_view.setDrawGridBackground(false)
+        val xAxis = chart_view.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.setDrawGridLines(false)
+        val leftAxis = chart_view.axisLeft
+        leftAxis.setDrawGridLines(false)
+        leftAxis.setDrawAxisLine(false)
+        val rightAxis = chart_view.axisRight
+        rightAxis.isEnabled = false
+        chart_view.legend.isEnabled = false
+        chart_view.resetTracking()
+    }
+
+    private fun loadChart(chart: List<ChartItem>) {
+        chart_view.data = ohclDataParser.createChartData(chart)
+        chart_view.invalidate()
+    }
+
+    private fun goToWebsite(url: String?) {
+        url?.let {
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.setData(Uri.parse(v.text.toString()))
+            intent.data = Uri.parse(it)
             startActivity(intent)
         }
     }

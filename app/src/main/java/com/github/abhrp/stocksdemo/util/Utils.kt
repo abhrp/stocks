@@ -24,6 +24,7 @@ class Utils @Inject constructor(private val context: Context) {
         return false
     }
 
+
     fun getImageLogoUrl(symbol: String?): String? {
         symbol?.let {
             return AppConstants.BASE_IMAGE_URL + symbol + AppConstants.IMAGE_TYPE

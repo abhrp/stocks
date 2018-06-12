@@ -25,7 +25,6 @@ import javax.inject.Inject
 
 class StocksActivity : AppCompatActivity(), StockItemClickListener {
 
-
     private val TAG = StocksActivity::class.java.canonicalName
 
     @Inject
@@ -86,6 +85,7 @@ class StocksActivity : AppCompatActivity(), StockItemClickListener {
 
         stocksViewModel.getStocksError().observe(this, Observer<Throwable> { error ->
             error?.let {
+                Snackbar.make(swipe_to_refresh, getString(R.string.error), Snackbar.LENGTH_LONG).show()
                 Logger.e(TAG, error)
             }
         })

@@ -5,6 +5,7 @@
     <color name="color_accent">#8BC34A</color>
     <color name="price_up">#007700</color>
     <color name="price_down">#CC0000</color>
+    <color name="screen_background_color">#00000000</color>
     <color name="list_item_background_color">#fafafa</color>
     <color name="dark_text_color">#544c63</color>
     <color name="light_text_color">#de898294</color>

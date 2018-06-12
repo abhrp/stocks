@@ -80,8 +80,8 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
 
     implementation 'org.apache.commons:commons-lang3:3.7'
-
-    implementation 'com.github.AnyChart:AnyChart-Android:0.2.5'
+    
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'

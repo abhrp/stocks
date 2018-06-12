@@ -14,7 +14,7 @@ data class Company(
         @ColumnInfo(name = "symbol") @SerializedName("symbol") val symbol: String,
         @ColumnInfo(name = "industry") @SerializedName("industry") val industry: String,
         @ColumnInfo(name = "website") @SerializedName("website") val website: String?,
-        @ColumnInfo(name = "ceo") @SerializedName("ceo") val ceo: String,
+        @ColumnInfo(name = "ceo") @SerializedName("CEO") val ceo: String,
         @ColumnInfo(name = "description") @SerializedName("description") val description: String,
         @ColumnInfo(name = "sector") @SerializedName("sector") val sector: String,
         @ColumnInfo(name = "chart") var chart: List<ChartItem>?
