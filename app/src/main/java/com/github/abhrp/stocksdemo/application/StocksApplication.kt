@@ -5,14 +5,17 @@ import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
 import com.github.abhrp.stocksdemo.BuildConfig
-import com.github.abhrp.stocksdemo.network.config.RetrofitModule
+import com.github.abhrp.stocksdemo.di.components.ApplicationComponent
+import com.github.abhrp.stocksdemo.di.components.DaggerApplicationComponent
+import com.github.abhrp.stocksdemo.di.modules.ApplicationModule
+import com.github.abhrp.stocksdemo.di.modules.NetworkModule
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import timber.log.Timber
 import javax.inject.Inject
 
-class StocksApplication: Application(), HasActivityInjector {
+class StocksApplication : Application(), HasActivityInjector {
 
     @Inject
     lateinit var activityInjector: DispatchingAndroidInjector<Activity>
@@ -23,7 +26,7 @@ class StocksApplication: Application(), HasActivityInjector {
     }
 
     companion object {
-        private var  instance:StocksApplication? = null
+        private var instance: StocksApplication? = null
 
         fun getApplication(): StocksApplication {
             return instance!!
@@ -34,9 +37,9 @@ class StocksApplication: Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
-        applicationComponent = DaggerApplicationComponent.builder().applicationModule(ApplicationModule(this)).retrofitModule(RetrofitModule(AppConstants.BASE_URL)).build()
+        applicationComponent = DaggerApplicationComponent.builder().applicationModule(ApplicationModule(this)).networkModule(NetworkModule(AppConstants.BASE_URL)).build()
         applicationComponent.inject(this)
-        if(BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
     }

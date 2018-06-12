@@ -20,4 +20,4 @@ data class Stock(
         @ColumnInfo(name = "open") @SerializedName("open") val open: Double,
         @ColumnInfo(name = "close") @SerializedName("close") val close: Double,
         @ColumnInfo(name = "isUp") var isUp: Boolean
-): Serializable
+) : Serializable

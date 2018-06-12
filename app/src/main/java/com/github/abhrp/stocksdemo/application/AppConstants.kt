@@ -6,10 +6,9 @@ object AppConstants {
     const val IMAGE_TYPE = ".png"
     const val ACCEPT = "application/json"
     const val HTTP_CACHE = "HttpCache";
-    const val CACHE_SIZE:Long = 10*1000*1000
+    const val CACHE_SIZE: Long = 10 * 1000 * 1000
     const val CONNECT_TIMEOUT = 60L
     const val READ_TIMEOUT = 60L
     const val UNKNOWN_ERROR = "Unknown error"
     const val STOCK = "stock"
-
 }

@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName
 )
 data class Company(
         @PrimaryKey @ColumnInfo(name = "id") @SerializedName("id") var id: String,
-        @ColumnInfo(name = "symbol")  @SerializedName("symbol") val symbol: String,
+        @ColumnInfo(name = "symbol") @SerializedName("symbol") val symbol: String,
         @ColumnInfo(name = "industry") @SerializedName("industry") val industry: String,
         @ColumnInfo(name = "website") @SerializedName("website") val website: String?,
         @ColumnInfo(name = "ceo") @SerializedName("ceo") val ceo: String,

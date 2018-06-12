@@ -13,12 +13,12 @@ import android.view.MenuItem
 import com.github.abhrp.stocksdemo.R
 import com.github.abhrp.stocksdemo.application.AppConstants
 import com.github.abhrp.stocksdemo.data.model.Stock
-import com.github.abhrp.stocksdemo.ui.StockItemClickListener
 import com.github.abhrp.stocksdemo.ui.adapters.StocksAdapter
+import com.github.abhrp.stocksdemo.ui.listeners.StockItemClickListener
 import com.github.abhrp.stocksdemo.util.Logger
 import com.github.abhrp.stocksdemo.util.Utils
-import com.github.abhrp.stocksdemo.viemodel.StocksViewModel
-import com.github.abhrp.stocksdemo.viemodel.StocksViewModelFactory
+import com.github.abhrp.stocksdemo.viemodels.StocksViewModel
+import com.github.abhrp.stocksdemo.viemodels.factories.StocksViewModelFactory
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_stocks.*
 import javax.inject.Inject
@@ -80,13 +80,11 @@ class StocksActivity : AppCompatActivity(), StockItemClickListener {
     }
 
     private fun handleStockData() {
-        stocksViewModel.getStocks().observe(this, Observer<List<Stock>> {
-            stocks ->
-            stocks?.let {updateUI(it)}
+        stocksViewModel.getStocks().observe(this, Observer<List<Stock>> { stocks ->
+            stocks?.let { updateUI(it) }
         })
 
-        stocksViewModel.getStocksError().observe(this, Observer<Throwable> {
-            error ->
+        stocksViewModel.getStocksError().observe(this, Observer<Throwable> { error ->
             error?.let {
                 Logger.e(TAG, error)
             }

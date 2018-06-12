@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.github.abhrp.stocksdemo.R
 import com.github.abhrp.stocksdemo.data.model.Stock
-import com.github.abhrp.stocksdemo.ui.StockItemClickListener
-import com.github.abhrp.stocksdemo.ui.StockViewHolder
+import com.github.abhrp.stocksdemo.ui.listeners.StockItemClickListener
+import com.github.abhrp.stocksdemo.ui.viewholders.StockViewHolder
 
-class StocksAdapter: RecyclerView.Adapter<StockViewHolder>() {
+class StocksAdapter : RecyclerView.Adapter<StockViewHolder>() {
 
     private lateinit var stocks: List<Stock>
     private var stockItemClickListener: StockItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StockViewHolder {
-       val itemView =  LayoutInflater.from(parent.context).inflate(R.layout.item_stock,
-               parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_stock,
+                parent, false)
         return StockViewHolder(itemView)
     }
 

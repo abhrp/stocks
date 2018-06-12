@@ -14,8 +14,8 @@ import com.github.abhrp.stocksdemo.data.model.Company
 import com.github.abhrp.stocksdemo.data.model.Stock
 import com.github.abhrp.stocksdemo.util.Logger
 import com.github.abhrp.stocksdemo.util.Utils
-import com.github.abhrp.stocksdemo.viemodel.CompanyDetailsViewModel
-import com.github.abhrp.stocksdemo.viemodel.CompanyViewModelFactory
+import com.github.abhrp.stocksdemo.viemodels.CompanyDetailsViewModel
+import com.github.abhrp.stocksdemo.viemodels.factories.CompanyViewModelFactory
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_company_details.*
 import kotlinx.android.synthetic.main.content_company_details.*
@@ -26,7 +26,7 @@ class CompanyDetailsActivity : AppCompatActivity(), View.OnClickListener {
 
     private val TAG = CompanyDetailsActivity::class.java.canonicalName
 
-    private lateinit var stock:Stock
+    private lateinit var stock: Stock
 
     @Inject
     lateinit var companyViewModelFactory: CompanyViewModelFactory
@@ -79,14 +79,12 @@ class CompanyDetailsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun handleCompanyData() {
-        companyViewModel.getCompany().observe(this, Observer<Company> {
-            company ->
+        companyViewModel.getCompany().observe(this, Observer<Company> { company ->
             company?.let {
                 updateUI(it)
             }
         })
-        companyViewModel.getCompanyError().observe(this, Observer<Throwable> {
-            error ->
+        companyViewModel.getCompanyError().observe(this, Observer<Throwable> { error ->
             error?.let {
                 Logger.e(TAG, error)
             }

@@ -1,7 +1,7 @@
 package com.github.abhrp.stocksdemo.data.remote
 
 
-import com.github.abhrp.stocksdemo.network.response.CompanyDetailsResponse
+import com.github.abhrp.stocksdemo.data.remote.response.CompanyDetailsResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path

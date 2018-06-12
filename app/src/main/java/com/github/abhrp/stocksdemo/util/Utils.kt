@@ -8,7 +8,7 @@ import com.github.abhrp.stocksdemo.data.model.Stock
 import java.text.DecimalFormat
 import javax.inject.Inject
 
-class Utils @Inject constructor(private val context:Context) {
+class Utils @Inject constructor(private val context: Context) {
 
     fun isConnectedToInternet(): Boolean {
         val connectivity = context.getSystemService(
@@ -41,7 +41,7 @@ class Utils @Inject constructor(private val context:Context) {
     }
 
     fun changePercentage(stock: Stock): Double {
-        val changePercentage = if (stock.changePercent != 0.0) stock.changePercent else decimalFormattedNumber((((stock.close - stock.open)/stock.open)*100))
+        val changePercentage = if (stock.changePercent != 0.0) stock.changePercent else decimalFormattedNumber((((stock.close - stock.open) / stock.open) * 100))
         return Math.abs(changePercentage)
     }
 
