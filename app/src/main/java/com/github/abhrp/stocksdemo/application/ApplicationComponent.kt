@@ -1,19 +1,33 @@
 package com.github.abhrp.stocksdemo.application
 
-import com.github.abhrp.stocksdemo.db.DatabaseModule
-import com.github.abhrp.stocksdemo.db.StockDao
-import com.github.abhrp.stocksdemo.network.config.RetrofitModule
+import com.github.abhrp.stocksdemo.data.local.CompanyDao
+import com.github.abhrp.stocksdemo.data.local.DatabaseModule
+import com.github.abhrp.stocksdemo.data.local.StockDao
+import com.github.abhrp.stocksdemo.data.remote.ApiProviderModule
+import com.github.abhrp.stocksdemo.data.remote.StocksDetailsApi
+import com.github.abhrp.stocksdemo.data.remote.StocksListingApi
 import com.github.abhrp.stocksdemo.network.image.PicassoModule
+import com.github.abhrp.stocksdemo.util.UtilModule
+import com.github.abhrp.stocksdemo.viemodel.ViewModelFactoryModule
 import com.squareup.picasso.Picasso
 import dagger.Component
-import retrofit2.Retrofit
+import dagger.android.AndroidInjectionModule
+import javax.inject.Singleton
 
-@ApplicationScope
-@Component(modules = [(ApplicationContextModule::class), (RetrofitModule::class), (PicassoModule::class), (DatabaseModule::class)])
+@Singleton
+@Component(modules = [(AndroidInjectionModule::class),
+   (ApplicationModule::class),
+   (ActivityInjectionModule::class),
+   (ApiProviderModule::class),
+   (PicassoModule::class),
+   (DatabaseModule::class),
+   (UtilModule::class),
+   (ViewModelFactoryModule::class)])
 interface ApplicationComponent {
-    fun retrofit(): Retrofit
-
-    fun picasso(): Picasso
-
-    fun stockDao(): StockDao
+   fun inject(app: StocksApplication)
+   fun picasso(): Picasso
+   fun stockApi(): StocksListingApi
+   fun companyApi(): StocksDetailsApi
+   fun stockDao(): StockDao
+   fun companyDao(): CompanyDao
 }

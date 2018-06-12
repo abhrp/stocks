@@ -1,13 +1,22 @@
 package com.github.abhrp.stocksdemo.application
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
 import com.github.abhrp.stocksdemo.BuildConfig
-import com.github.abhrp.stocksdemo.db.DatabaseModule
+import com.github.abhrp.stocksdemo.network.config.RetrofitModule
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
 import timber.log.Timber
+import javax.inject.Inject
 
-class StocksApplication: Application() {
+class StocksApplication: Application(), HasActivityInjector {
+
+    @Inject
+    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+
 
     init {
         instance = this
@@ -25,13 +34,14 @@ class StocksApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
-
+        applicationComponent = DaggerApplicationComponent.builder().applicationModule(ApplicationModule(this)).retrofitModule(RetrofitModule(AppConstants.BASE_URL)).build()
+        applicationComponent.inject(this)
         if(BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
-
-        applicationComponent = DaggerApplicationComponent.builder().applicationContextModule(ApplicationContextModule(this)).databaseModule(DatabaseModule(this)).build()
     }
+
+    override fun activityInjector(): AndroidInjector<Activity> = activityInjector
 
     fun getApplicationComponent(): ApplicationComponent {
         return applicationComponent;

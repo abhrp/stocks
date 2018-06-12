@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Stocks Demo</string>
     <string name="action_settings">Settings</string>
+    <string name="stock_symbol">(%1$s)</string>
+    <string name="stock_change_percentage">(%1$s\%%)</string>
+    <string name="stocks_listing_title">The Investors Exchange | IEX</string>
+    <string name="offline_message">Viewing offline data</string>
+    <string name="title_activity_company_details">CompanyDetailsActivity</string>
+    <string name="low_label">Low</string>
+    <string name="high_label">High</string>
+    <string name="industry_label">Industry:</string>
+    <string name="sector_label">Sector:</string>
+    <string name="ceo_label">Ceo:</string>
 </resources>

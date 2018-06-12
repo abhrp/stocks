@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_stock_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="6dp"
+    android:layout_marginLeft="6dp"
+    android:layout_marginEnd="6dp"
+    android:layout_marginRight="6dp"
+    android:paddingBottom="12dp"
+    android:paddingTop="12dp"
+    android:elevation="2dp"
+    android:background="@drawable/list_item_background"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    >
+
+    <TextView
+        android:id="@+id/company_name"
+        style="@style/semi_bold_dark"
+        android:layout_width="0dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginStart="12dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Apple" />
+    <View
+        android:id="@+id/title_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/divider_color"
+        app:layout_constraintTop_toBottomOf="@id/company_name" />
+
+    <com.github.abhrp.stocksdemo.ui.views.NetworkImageView
+        android:id="@+id/company_logo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_divider" />
+
+    <TextView
+        android:id="@+id/stock_symbol"
+        style="@style/semi_bold_dark"
+        android:layout_marginEnd="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toStartOf="@+id/stock_trend_icon"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/company_logo"
+        app:layout_constraintTop_toBottomOf="@+id/title_divider"
+        tools:text="APPL" />
+
+    <TextView
+        android:id="@+id/stock_exchange"
+        style="@style/light_text"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:gravity="top"
+        app:layout_constraintStart_toEndOf="@+id/company_logo"
+        app:layout_constraintTop_toBottomOf="@+id/stock_symbol"
+        tools:text="NYSE" />
+
+    <TextView
+        android:id="@+id/stock_price"
+        style="@style/semi_bold_dark"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="16dp"
+        android:gravity="end"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_divider"
+        tools:text="45.87"
+        tools:textColor="@color/price_up" />
+
+    <ImageView
+        android:id="@+id/stock_trend_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/stock_price"
+        app:layout_constraintTop_toBottomOf="@+id/title_divider"
+        app:srcCompat="@drawable/ic_price_up" />
+
+    <TextView
+        android:id="@+id/stock_change_price"
+        style="@style/light_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"
+        android:gravity="end"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toStartOf="@+id/stock_change_percentage"
+        app:layout_constraintTop_toBottomOf="@+id/stock_price"
+        tools:text="5.87" />
+
+    <TextView
+        android:id="@+id/stock_change_percentage"
+        style="@style/light_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="4dp"
+        android:gravity="end"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stock_price"
+        tools:text="(0.5%)" />
+</android.support.constraint.ConstraintLayout>

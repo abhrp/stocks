@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="base_text_view">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="semi_bold_dark" parent="base_text_view">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/dark_text_color</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+    </style>
+
+    <style name="light_text" parent="base_text_view">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/light_text_color</item>
+        <item name="android:lineSpacingExtra">9.3sp</item>
+    </style>
+</resources>

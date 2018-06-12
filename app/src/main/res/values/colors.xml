@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#8BC34A</color>
-    <color name="colorPrimaryDark">#689F38</color>
-    <color name="colorAccent">#8BC34A</color>
+    <color name="color_primary">#8BC34A</color>
+    <color name="color_primary_dark">#689F38</color>
+    <color name="color_accent">#8BC34A</color>
+    <color name="price_up">#007700</color>
+    <color name="price_down">#CC0000</color>
+    <color name="list_item_background_color">#fafafa</color>
+    <color name="dark_text_color">#544c63</color>
+    <color name="light_text_color">#de898294</color>
+    <color name="divider_color">#1e000000</color>
+    <color name="title_color">#f6f4f7</color>
+    <color name="subtitle_color">#b3f6f4f7</color>
+    <color name="link_color">#0000ee</color>
 </resources>
