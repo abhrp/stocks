@@ -11,6 +11,7 @@ def room_version = '1.1.0'
 def dagger_version = '2.16'
 def retrofit_version = '2.4.0'
 def okhttp_version = '3.10.0'
+def arch_components = '1.1.1'
 
 android {
     compileSdkVersion 27
@@ -67,8 +68,8 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
     implementation "com.squareup.okhttp3:okhttp-urlconnection:$okhttp_version"
 
-    implementation "android.arch.lifecycle:extensions:1.1.1"
-    kapt "android.arch.lifecycle:compiler:1.1.1"
+    implementation "android.arch.lifecycle:extensions:$arch_components"
+    kapt "android.arch.lifecycle:compiler:$arch_components"
 
     implementation 'io.reactivex.rxjava2:rxjava:2.1.14'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
@@ -90,8 +91,20 @@ dependencies {
 
     implementation 'com.android.support:multidex:1.0.3'
 
+    testImplementation("android.arch.core:core-testing:$arch_components", {
+        exclude group: 'com.android.support', module: 'support-compat'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-core-utils'
+    })
+
+    testImplementation('com.nhaarman:mockito-kotlin-kt1.1:1.5.0', {
+        exclude group: 'org.jetbrains.kotlin'
+        exclude group: 'org.mockito'
+    })
+
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.18.3'
+    testImplementation 'org.mockito:mockito-inline:2.18.3'
     testImplementation "android.arch.persistence.room:testing:$room_version"
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
