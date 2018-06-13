@@ -7,7 +7,6 @@ import com.github.abhrp.stocksdemo.util.Utils
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class StocksRepository @Inject constructor(private val stocksListingApi: StocksListingApi, private val stockDao: StockDao, private val utils: Utils) {
 
